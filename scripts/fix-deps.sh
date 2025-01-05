@@ -33,10 +33,10 @@ for a in $fix_files; do sed -i 's/dovecot/dovecot/' $a; done
 #------------------------------------------------------------------#
 	
 #------------------------------------------------------------------#
-# xinit
-echo "xinit"
-fix_files=$(grep -rl xinit $DEPTREE_DEPS)
-for a in $fix_files; do sed -i 's/xinit/xinit/' $a; done
+# x-window-system
+echo "x-window-system"
+fix_files=$(grep -rl x-window-system $DEPTREE_DEPS)
+for a in $fix_files; do sed -i 's/x-window-system/xinit/' $a; done
 #------------------------------------------------------------------#
 	
 #------------------------------------------------------------------#
