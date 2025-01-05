@@ -1,0 +1,47 @@
+# lpm-custom
+Custom hooks for lfs-pkmg
+
+Directories:
+
+--------------------------------------------------------------------
+batch
+
+File list of build and/or group files.
+
+
+
+--------------------------------------------------------------------
+build
+
+Build scripts for non-book packages.
+
+
+--------------------------------------------------------------------
+list
+
+Pre- and post- install hook scripts for lpm install lists.
+
+
+--------------------------------------------------------------------
+group
+
+File list of book packages.
+
+
+--------------------------------------------------------------------
+meta
+
+File list of batch files.
+
+
+--------------------------------------------------------------------
+script
+
+Script hooks for modification of the lpm build files.
+
+
+--------------------------------------------------------------------
+package
+
+Pre- and post- install hook scripts for lpm packages.
+
