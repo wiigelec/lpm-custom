@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo chroot $INSTALLROOT bash -c 'groupadd -g 65 lightdm'
+sudo chroot $INSTALLROOT bash -c 'useradd  -c "Lightdm Daemon" \
+         -d /var/lib/lightdm \
+         -u 65 -g lightdm    \
+         -s /bin/false lightdm' || true
