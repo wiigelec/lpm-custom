@@ -60,6 +60,7 @@ extract=./extract
 dv=./dejavu
 noto=./usr/share/fonts/noto
 mkdir -pv $extract
+mkdir -pv $dv
 mkdir -pv $noto
 
 # extract
