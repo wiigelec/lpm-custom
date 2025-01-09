@@ -1,7 +1,7 @@
 #!/bin/bash
 ####################################################################
 #
-# noto-fonts.build
+# dejavu-noto-fonts.build
 #
 ####################################################################
 
@@ -15,7 +15,7 @@ SRC_DIR=/sources
 ####################################################################
 
 ### PACKAGE PARAMETERS ###
-PKG_NAME=noto-fonts
+PKG_NAME=dejavu-noto-fonts
 PKG_VER=0.12.2
 PKG_ARCH=$(uname -m)
 PKG_LFS=blfs-$BOOK_VERS-$(echo $REV | tr '[:upper:]' '[:lower:]')
@@ -25,6 +25,7 @@ ARCHIVE_NAME=$LPM_ARCHIVE/$PKG_NAME--$PKG_VER--$PKG_ARCH--$PKG_LFS.$PKG_EXT
 
 ### DOWNLOAD ###
 
+dejavu=dejavu-fonts-ttf-2.37.zip
 sans=NotoSans-v2.015.zip
 serif=NotoSerif-v2.015.zip
 symbols=NotoSansSymbols-v2.003.zip
@@ -33,13 +34,16 @@ cjk=02_NotoSansCJK-TTF-VF.zip
 
 pushd $SOURCE_DIR
 
-# LATIN
-wget https://github.com/notofonts/latin-greek-cyrillic/releases/download/NotoSans-v2.015/NotoSans-v2.015.zip
-wget https://github.com/notofonts/latin-greek-cyrillic/releases/download/NotoSerif-v2.015/NotoSerif-v2.015.zip
-wget https://github.com/notofonts/symbols/releases/download/NotoSansSymbols-v2.003/NotoSansSymbols-v2.003.zip
+# DEJAVU
+wget -nc http://sourceforge.net/projects/dejavu/files/dejavu/2.37/dejavu-fonts-ttf-2.37.zip
 
-# NOTO CJK
-wget https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/02_NotoSansCJK-TTF-VF.zip
+# LATIN
+wget -nc https://github.com/notofonts/latin-greek-cyrillic/releases/download/NotoSans-v2.015/NotoSans-v2.015.zip
+wget -nc https://github.com/notofonts/latin-greek-cyrillic/releases/download/NotoSerif-v2.015/NotoSerif-v2.015.zip
+wget -nc https://github.com/notofonts/symbols/releases/download/NotoSansSymbols-v2.003/NotoSansSymbols-v2.003.zip
+
+# CJK
+wget -nc https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/02_NotoSansCJK-TTF-VF.zip
 
 
 ####################################################################
@@ -53,19 +57,23 @@ mkdir -pv $DEST_DIR
 pushd $DEST_DIR > /dev/null
 
 extract=./extract
+dv=./dejavu
 noto=./usr/share/fonts/noto
 mkdir -pv $extract
 mkdir -pv $noto
 
 # extract
 pushd ./extract > /dev/null
+yes | unzip ../../$dejavu
 yes | unzip ../../$sans
 yes | unzip ../../$serif
 yes | unzip ../../$symbols
 yes | unzip ../../$cjk
 popd > /dev/null
+
+find $extract/dejavu-fonts-ttf-2.37 -name "*.ttf" -exec cp {} $dv \;
 find -path "$extract/*full*" -name "*.ttf" -exec cp {} $noto \;
-find -path "$extract/*Variable*" -name "*.ttf" -exec cp {} $noto \;
+find $extract/Variable -name "*.ttf" -exec cp {} $noto \;
 
 rm -rf $extract
 
