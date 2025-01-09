@@ -57,7 +57,7 @@ mkdir -pv $DEST_DIR
 pushd $DEST_DIR > /dev/null
 
 extract=./extract
-dv=./dejavu
+dv=./usr/share/fonts/dejavu
 noto=./usr/share/fonts/noto
 mkdir -pv $extract
 mkdir -pv $dv
