@@ -94,6 +94,8 @@ sudo tar -cJpf $ARCHIVE_NAME .
 ### CLEANUP ###
 popd > /dev/null
 rm -rf $DEST_DIR
+rm $dejavu $sans $serif $symbols $cjk
+
 
 exit
 
