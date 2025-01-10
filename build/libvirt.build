@@ -105,6 +105,7 @@ popd > /dev/null
 
 pushd / > /dev/null
 sudo tar -xpf $ARCHIVE_NAME
+sudo ldconfig
 popd > /dev/null
 
 

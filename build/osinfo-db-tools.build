@@ -66,6 +66,10 @@ mkdir -pv $DESTDIR
 
 ### CONFIGURE MAKE INSTALL ###
 
+# patch
+sed -i 's/xmlSetStructuredErrorFunc(NULL, validate_structured_error_nop);/xmlSetStructuredErrorFunc(NULL, (void\*)validate_structured_error_nop);/' \
+	./tools/osinfo-db-validate.c
+
 meson setup --prefix=/usr build
 ninja -C build
 
