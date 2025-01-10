@@ -1,0 +1,13 @@
+virt-manager.group
+virt-manager.build
+libvirt.group
+libvirt.build
+libvirt-glib.build
+osinfo-db-tools.group
+osinfo-db-tools.build
+libosinfo.group
+libosinfo.build
+libvirt-python.build
+dnsmasq.build
+dmidecode.build
+netcat.build

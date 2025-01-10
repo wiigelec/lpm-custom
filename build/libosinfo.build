@@ -1,0 +1,115 @@
+#!/bin/bash
+####################################################################
+#
+# libosinfo.build
+#
+####################################################################
+
+set -e
+
+# ENV
+if [ -r /etc/profile ]; then source /etc/profile; fi
+export MAKEFLAGS="-j$(nproc)"
+
+unset CFLAGS
+unset CXXFLAGS
+unset LDFLAGS
+unset NINJAJOBS
+unset MAKELEVEL
+unset MAKE_TERMOUT
+unset MAKE_TERMERR
+
+
+####################################################################
+# PACKAGE SETUP
+####################################################################
+
+PKG_NAME=libosinfo
+PKG_VER=1.11.0
+PKG_ARCH=$(uname -m)
+PKG_LFS=blfs-$BOOK_VERS-$(echo $REV | tr '[:upper:]' '[:lower:]')
+[[ ! -z $BUILD_PRETEND ]] && PKG_LFS="PRETEND$PKG_LFS"
+PKG_EXT=txz
+ARCHIVE_NAME=$LPM_ARCHIVE/$PKG_NAME--$PKG_VER--$PKG_ARCH--$PKG_LFS.$PKG_EXT
+
+
+####################################################################
+# DOWNLOADS
+####################################################################
+
+SRC_DIR=/sources
+
+TAR_FILE=$PKG_NAME-$PKG_VER.tar.xz
+PKG_URL=https://releases.pagure.org/libosinfo/$TAR_FILE
+
+pushd > /dev/null $SRC_DIR
+wget -nc $PKG_URL
+
+[[ -d extract ]] && sudo rm -rf extract
+mkdir extract
+pushd extract > /dev/null
+tar -xf ../$TAR_FILE
+tardir=${TAR_FILE%.tar*}
+pushd $tardir > /dev/null
+
+
+####################################################################
+# BUILD COMMANDS
+####################################################################
+
+
+### DESTDIR ###
+DESTDIR=$SOURCE_DIR/destdir
+[[ -d $DESTDIR ]] && sudo rm -rf $DESTDIR
+mkdir -pv $DESTDIR
+
+
+### CONFIGURE MAKE INSTALL ###
+
+meson setup --prefix=/usr build -Denable-gtk-doc=false
+ninja -C build
+
+sudo DESTDIR=$DESTDIR ninja -C build install
+
+
+popd > /dev/null # tar dir
+popd > /dev/null # extract
+
+### END CONFIGURE MAKE INSTALL ###
+
+
+####################################################################
+# PACKAGE CREATE
+####################################################################
+
+echo
+echo "Creating archive $ARCHIVE_NAME..."
+echo
+
+### CREATE ARCHIVE ###
+
+[[ ! -d $LPM_ARCHIVE ]] && sudo mkdir -pv $LPM_ARCHIVE
+pushd $DESTDIR > /dev/null
+sudo chown root:root .
+sudo tar -cJpf $ARCHIVE_NAME .
+popd > /dev/null
+
+
+### INSTALL ARCHIVE ###
+
+pushd / > /dev/null
+sudo tar -xpf $ARCHIVE_NAME
+popd > /dev/null
+
+
+### CLEANUP ###
+
+sudo rm -rf extract
+sudo rm -rf $DESTDIR
+rm $TAR_FILE > /dev/null 2>&1 || true
+
+popd > /dev/null # src_dir
+
+
+exit
+
