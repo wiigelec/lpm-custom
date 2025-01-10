@@ -45,7 +45,7 @@ PKG_URL=https://launchpad.net/ufw/0.36/0.36.2/+download/$TAR_FILE
 pushd > /dev/null $SRC_DIR
 wget -nc $PKG_URL
 
-[[ -d extract ]] && rm -rf extract
+[[ -d extract ]] && sudo rm -rf extract
 mkdir extract
 pushd extract > /dev/null
 tar -xf ../$TAR_FILE
