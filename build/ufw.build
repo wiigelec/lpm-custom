@@ -28,7 +28,7 @@ PKG_NAME=ufw
 PKG_VER=0.36.2
 PKG_ARCH=$(uname -m)
 PKG_LFS=blfs-$BOOK_VERS-$(echo $REV | tr '[:upper:]' '[:lower:]')
-[[ ! -z BUILD_PRETEND ]] && PKG_LFS="PRETEND$PKG_LFS"
+[[ ! -z $BUILD_PRETEND ]] && PKG_LFS="PRETEND$PKG_LFS"
 PKG_EXT=txz
 ARCHIVE_NAME=$LPM_ARCHIVE/$PKG_NAME--$PKG_VER--$PKG_ARCH--$PKG_LFS.$PKG_EXT
 
@@ -98,7 +98,7 @@ popd > /dev/null
 
 ### CLEANUP ###
 
-rm -rf extract
+sudo rm -rf extract
 sudo rm -rf $DESTDIR
 rm $TAR_FILE > /dev/null 2>&1 || true
 
