@@ -93,7 +93,7 @@ echo
 [[ ! -d $LPM_ARCHIVE ]] && sudo mkdir -pv $LPM_ARCHIVE
 pushd $DESTDIR > /dev/null
 sudo tar -cJpf $ARCHIVE_NAME .
-popd $DESTDIR > /dev/null
+popd > /dev/null
 
 
 ### CLEANUP ###
