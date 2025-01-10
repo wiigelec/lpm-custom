@@ -19,11 +19,14 @@ PKG_NAME=dejavu-noto-fonts
 PKG_VER=0.12.2
 PKG_ARCH=$(uname -m)
 PKG_LFS=blfs-$BOOK_VERS-$(echo $REV | tr '[:upper:]' '[:lower:]')
+[[ ! -z BUILD_PRETEND ]] && PKG_LFS="PRETEND$PKG_LFS"
 PKG_EXT=txz
 ARCHIVE_NAME=$LPM_ARCHIVE/$PKG_NAME--$PKG_VER--$PKG_ARCH--$PKG_LFS.$PKG_EXT
 
 
-### DOWNLOAD ###
+####################################################################
+# DOWNLOADS
+####################################################################
 
 dejavu=dejavu-fonts-ttf-2.37.zip
 sans=NotoSans-v2.015.zip
@@ -47,14 +50,19 @@ wget -nc https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/02_No
 
 
 ####################################################################
-# PACKAGE BUILD
+# BUILD COMMANDS
 ####################################################################
 
+
+
 ### DESTDIR ###
-DEST_DIR=$SOURCE_DIR/destdir
-[[ -d $DEST_DIR ]] && rm -rf $DEST_DIR
-mkdir -pv $DEST_DIR
-pushd $DEST_DIR > /dev/null
+DESTDIR=$SOURCE_DIR/destdir
+[[ -d $DESTDIR ]] && rm -rf $DESTDIR
+mkdir -pv $DESTDIR
+pushd $DESTDIR > /dev/null
+
+
+### CONFIGURE MAKE INSTALL ###
 
 extract=./extract
 dv=./usr/share/fonts/dejavu
@@ -79,6 +87,9 @@ find $extract/Variable -name "*.ttf" -exec cp {} $noto \;
 rm -rf $extract
 
 
+### END CONFIGURE MAKE INSTALL ###
+
+
 ####################################################################
 # PACKAGE CREATE
 ####################################################################
@@ -93,8 +104,8 @@ sudo tar -cJpf $ARCHIVE_NAME .
 
 ### CLEANUP ###
 popd > /dev/null
-rm -rf $DEST_DIR
-rm $dejavu $sans $serif $symbols $cjk
+sudo rm -rf $DESTDIR
+rm $dejavu $sans $serif $symbols $cjk > /dev/null 2>&1 || true
 
 
 exit
