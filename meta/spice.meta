@@ -1,0 +1,8 @@
+spice-protocol.build
+spice.group
+orc.build
+spice.build
+usbredir.group
+usbredir.build
+spice-gtk.group
+spice-gtk.build
