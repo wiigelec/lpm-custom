@@ -92,6 +92,7 @@ echo
 
 [[ ! -d $LPM_ARCHIVE ]] && sudo mkdir -pv $LPM_ARCHIVE
 pushd $DESTDIR > /dev/null
+sudo chown root:root .
 sudo tar -cJpf $ARCHIVE_NAME .
 popd > /dev/null
 

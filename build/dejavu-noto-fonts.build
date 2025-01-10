@@ -99,6 +99,7 @@ echo "Creating archive $ARCHIVE_NAME..."
 echo
 
 ### CREATE ARCHIVE ###
+sudo chown -R root:root .
 sudo tar -cJpf $ARCHIVE_NAME .
 
 
