@@ -95,6 +95,13 @@ sudo tar -cJpf $ARCHIVE_NAME .
 popd > /dev/null
 
 
+### INSTALL ARCHIVE ###
+
+pushd / > /dev/null
+sudo tar -xpf $ARCHIVE_NAME
+popd > /dev/null
+
+
 ### CLEANUP ###
 
 sudo rm -rf extract
