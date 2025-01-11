@@ -40,6 +40,14 @@ sed -i 's/export LANG=<ll>.*/export LANG=C.UTF-8/g' $FILE
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# which
+FILE=$BUILD_SCRIPTS/which.build
+echo ${FILE##*/}
+line1=$(grep -n "cat > /usr/bin/which << \"EOF\"" $FILE | sed 's/:.*//')
+line2=$(grep -n "chown -v root:root /usr/bin/which" $FILE | sed 's/:.*//')
+sed -i "$line1,${line2}d" $FILE
+#------------------------------------------------------------------#
+
 #------------------------------------------------------------------#
 # bash -e
 echo "bash -e"
