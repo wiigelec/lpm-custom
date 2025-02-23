@@ -1,0 +1,8 @@
+xinit
+icewm
+lightdm
+xfce4-terminal
+network-manager-applet
+openssh
+zsh
+firefox
