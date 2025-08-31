@@ -55,7 +55,7 @@ echo ${FILE##*/}
 line1=$(grep -n "make install-dhcpcd" $FILE | sed 's/:.*//')
 line2=$(grep -n "systemctl start dhcpcd@eth0" $FILE | sed 's/:.*//')
 line3=$(grep -n "systemctl enable dhcpcd@eth0" $FILE | sed 's/:.*//')
-sed -i "$line1,$line2,${line3}d" $FILE
+sed -i "${line1}d;${line2}d;${line3}d" $FILE
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
