@@ -70,6 +70,19 @@ sed -i "${line3}d" $FILE
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# wpa_supplicant
+FILE=$BUILD_SCRIPTS/wpa_supplicant.build
+echo ${FILE##*/}
+line1=$(grep -n "network={" $FILE | sed 's/:.*//')
+line2=$(grep -n "update_config=1" $FILE | tail -n1 | sed 's/:.*//')
+sed -i "$line1,${line2}d" $FILE
+line3=$(grep -n "systemctl start wpa_supplicant@wlan0" $FILE | sed 's/:.*//')
+sed -i "${line3}d" $FILE
+line3=$(grep -n "systemctl enable wpa_supplicant@wlan0" $FILE | sed 's/:.*//')
+sed -i "${line3}d" $FILE
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # bash -e
 echo "bash -e"
 fix_files=$(grep -rl "bash -e" $BUILD_SCRIPTS)
