@@ -59,6 +59,17 @@ sed -i "${line1}d;${line2}d;${line3}d" $FILE
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# iptables
+FILE=$BUILD_SCRIPTS/iptables.build
+echo ${FILE##*/}
+line1=$(grep -n "iptables -A INPUT  -i ! WAN1  -j ACCEPT" $FILE | sed 's/:.*//')
+line2=$(grep -n "iptables -A OUTPUT -j" $FILE | tail -n1 | sed 's/:.*//')
+sed -i "$line1,${line2}d" $FILE
+line3=$(grep -n "make install-iptables" $FILE | sed 's/:.*//')
+sed -i "${line3}d" $FILE
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # bash -e
 echo "bash -e"
 fix_files=$(grep -rl "bash -e" $BUILD_SCRIPTS)
