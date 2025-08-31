@@ -49,6 +49,16 @@ sed -i "$line1,${line2}d" $FILE
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# dhcpd
+FILE=$BUILD_SCRIPTS/dhcpd.build
+echo ${FILE##*/}
+line1=$(grep -n "make install-dhcpcd" $FILE | sed 's/:.*//')
+line2=$(grep -n "systemctl start dhcpcd@eth0" $FILE | sed 's/:.*//')
+line3=$(grep -n "systemctl enable dhcpcd@eth0" $FILE | sed 's/:.*//')
+sed -i "$line1,$line2,${line3}d" $FILE
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # bash -e
 echo "bash -e"
 fix_files=$(grep -rl "bash -e" $BUILD_SCRIPTS)
