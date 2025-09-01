@@ -91,6 +91,15 @@ sed -i "${line1}d" $FILE
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# libnl
+FILE=$BUILD_SCRIPTS/libnl.build
+echo ${FILE##*/}
+line1=$(grep -n "General setup --->" $FILE | sed 's/:.*//')
+line2=$(grep -n "<*/M>   Virtual Routing and Forwarding (Lite)" $FILE | tail -n1 | sed 's/:.*//')
+sed -i "$line1,${line2}d" $FILE
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # bash -e
 echo "bash -e"
 fix_files=$(grep -rl "bash -e" $BUILD_SCRIPTS)
