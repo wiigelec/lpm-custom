@@ -37,6 +37,12 @@ linenum=$(grep -n "### CONFIGURE MAKE INSTALL ###" $FILE | sed 's/:.*//')
 linenum2=$(grep -n "### END CONFIGURE MAKE INSTALL ###" $FILE | sed 's/:.*//')
 sed -i "${linenum},${linenum2}s/\\$/\\\\\$/g" $FILE
 sed -i 's/export LANG=<ll>.*/export LANG=C.UTF-8/g' $FILE
+sed -i '/cat > ~\/.bash_profile << "EOF"/ i \
+install --directory --mode=0755 --owner=root --group=root \/etc\/skel' $FILE
+sed -i 's/cat > ~\/.bash_profile << "EOF"/cat > \/etc\/skel\/.bash_profile << "EOF"/g' $FILE
+sed -i 's/cat > ~\/.profile << "EOF"/cat > \/etc\/skel\/.profile << "EOF"/g' $FILE
+sed -i 's/cat > ~\/.bashrc << "EOF"/cat > \/etc\/skel\/.bashrc << "EOF"/g' $FILE
+sed -i 's/cat > ~\/.bash_logout << "EOF"/cat > \/etc\/skel\/.bash_logout << "EOF"/g' $FILE
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
