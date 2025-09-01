@@ -43,6 +43,7 @@ sed -i 's/cat > ~\/.bash_profile << "EOF"/cat > \/etc\/skel\/.bash_profile << "E
 sed -i 's/cat > ~\/.profile << "EOF"/cat > \/etc\/skel\/.profile << "EOF"/g' $FILE
 sed -i 's/cat > ~\/.bashrc << "EOF"/cat > \/etc\/skel\/.bashrc << "EOF"/g' $FILE
 sed -i 's/cat > ~\/.bash_logout << "EOF"/cat > \/etc\/skel\/.bash_logout << "EOF"/g' $FILE
+sed -i 's/\\$HOME/\$HOME/g' $FILE
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
