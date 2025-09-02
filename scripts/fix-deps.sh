@@ -67,6 +67,7 @@ echo "--graphite2--" >> $DEPTREE_DEPS/harfbuzz.deps
 
 cp $DEPTREE_DEPS/harfbuzz.deps $DEPTREE_DEPS/freetype2.deps
 cp $DEPTREE_DEPS/harfbuzz.deps $DEPTREE_DEPS/graphite2.deps
+#------------------------------------------------------------------#
 	
 #------------------------------------------------------------------#
 # libva/mesa
@@ -80,10 +81,13 @@ echo "--libva--" >> $DEPTREE_DEPS/mesa.deps
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
-# gcr
-echo "gcr"
-sed -i '/--gcr--/d' $DEPTREE_DEPS/gcr.deps
-echo "openssh" >> $DEPTREE_DEPS/gcr.deps 
-echo "--gcr--" >> $DEPTREE_DEPS/gcr.deps
+# libsecret
+echo "libsecret"
+sed -i '/gnome-keyring/d' $DEPTREE_DEPS/libsecret.deps
 #------------------------------------------------------------------#
 
+#------------------------------------------------------------------#
+# network-manager-applet
+echo "network-manager-applet"
+echo "gnome-keyring" >> $DEPTREE_DEPS/network-manager-applet.deps
+#------------------------------------------------------------------#
