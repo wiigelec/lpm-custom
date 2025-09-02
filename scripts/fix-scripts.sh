@@ -226,6 +226,35 @@ fi
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# cyrus-sasl
+FILE=$BUILD_SCRIPTS/cyrus-sasl.build
+echo ${FILE##*/}
+line1=$(grep -n "make install-saslauthd" $FILE | sed 's/:.*//')
+sed -i "${line1}d" $FILE
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
+# openldap
+FILE=$BUILD_SCRIPTS/openldap.build
+echo ${FILE##*/}
+line1=$(grep -n "make install-slapd" $FILE | sed 's/:.*//')
+sed -i "${line1}d" $FILE
+line1=$(grep -n "systemctl start slapd" $FILE | sed 's/:.*//')
+sed -i "${line1}d" $FILE
+line1=$(grep -n "ldapsearch" $FILE | sed 's/:.*//')
+line2=$(grep -n "# numEntries: 1" $FILE | sed 's/:.*//')
+sed -i "$line1,${line2}d" $FILE
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
+# openssh
+FILE=$BUILD_SCRIPTS/openssh.build
+echo ${FILE##*/}
+line1=$(grep -n "make install-sshd" $FILE | sed 's/:.*//')
+sed -i "${line1}d" $FILE
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # lightdm
 FILE=$BUILD_SCRIPTS/lightdm.build
 echo ${FILE##*/}
