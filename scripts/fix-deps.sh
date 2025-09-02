@@ -87,6 +87,12 @@ sed -i '/gnome-keyring/d' $DEPTREE_DEPS/libsecret.deps
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# gcr
+echo "gcr"
+sed -i '/--gcr--/ i openssh' $DEPTREE_DEPS/gcr.deps
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # network-manager-applet
 echo "network-manager-applet"
 echo "gnome-keyring" >> $DEPTREE_DEPS/network-manager-applet.deps
