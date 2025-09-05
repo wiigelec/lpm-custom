@@ -97,3 +97,10 @@ sed -i '/--gcr--/ i openssh' $DEPTREE_DEPS/gcr.deps
 echo "network-manager-applet"
 echo "gnome-keyring" >> $DEPTREE_DEPS/network-manager-applet.deps
 #------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
+# urllib
+echo "urllib"
+sed -i 's/hatchling/hatch-vcs/' $DEPTREE_DEPS/urllib3.deps
+#------------------------------------------------------------------#
+
