@@ -274,6 +274,16 @@ fi
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# cups
+FILE=$BUILD_SCRIPTS/cups.build
+echo ${FILE##*/}
+if [[ -f $FILE ]]; then
+sed -i '/usermod -a -G lpadmin <username>/d' $FILE
+sed -i '/systemctl enable cups/d' $FILE
+fi
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # imlib2
 FILE=$BUILD_SCRIPTS/imlib2.build
 echo ${FILE##*/}
