@@ -187,6 +187,16 @@ fi
 #------------------------------------------------------------------#
 
 #------------------------------------------------------------------#
+# xcb utils
+FILE=$BUILD_SCRIPTS/xcb-utilities.build
+echo ${FILE##*/}
+if [[ -f $FILE ]]; then
+sed -i '/exit/d' $FILE
+echo "exit" >> $FILE
+fi
+#------------------------------------------------------------------#
+
+#------------------------------------------------------------------#
 # harfbuzz/freetype/graphite
 echo "harfbuzz/freetype/graphite"
 cp $BUILD_SCRIPTS/freetype2.build $BUILD_SCRIPTS/freetype2-pass1.build
